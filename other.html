@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CLASSCULTURE</title>
+   <link rel="icon" href="./img/lil.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <video autoplay loop id="bgVideo" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-999;object-fit:cover;pointer-events:none;">
+    <source src="./video/bg01.mp4" type="video/mp4">
+  </video>
+
+  <nav class="menu-bar">
+    <a href="home.html" class="menu-item">HOME</a>
+    <a href="artists.html" class="menu-item">ARTISTS</a>
+    <a href="other.html" class="menu-item">OTHER?</a>
+    <button id="mute-btn" class="mute-control" aria-label="Mute/unmute background video">🔊</button>
+  </nav>
+
+  <video autoplay loop id="myVideo">
+    <source src="./video/alternate01.mp4" type="video/mp4">
+  </video>
+</div>
+
+</div>
+
+<div class="buffer-c">  
+
+</div>
+
+
+  <script>
+// Mute button logic
+const bgVideo = document.getElementById('bgVideo');
+const muteBtn = document.getElementById('mute-btn');
+try { bgVideo.volume = 0.05; } catch (e) {}
+bgVideo.muted = bgVideo.muted || false;
+function updateMuteIcon() {
+  muteBtn.textContent = bgVideo.muted ? '🔇' : '🔊';
+}
+muteBtn.addEventListener('click', function() {
+  bgVideo.muted = !bgVideo.muted;
+  updateMuteIcon();
+});
+const playPromise = bgVideo.play();
+if (playPromise !== undefined) {
+  playPromise.catch(function() {
+    bgVideo.muted = true;
+    updateMuteIcon();
+  });
+}
+updateMuteIcon();
+
+// Live proximity variables for corners and dynamic SVG filter update
+let A = 0, B = 0, C = 0, D = 0;
+const colorMatrix = document.getElementById('liveColorMatrix');
+function updateProximityVars(e) {
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  const x = e.clientX;
+  const y = e.clientY;
+  const maxDist = Math.sqrt(w*w + h*h);
+  const dA = Math.sqrt(x*x + y*y);
+  const dB = Math.sqrt((w-x)*(w-x) + y*y);
+  const dC = Math.sqrt(x*x + (h-y)*(h-y));
+  const dD = Math.sqrt((w-x)*(w-x) + (h-y)*(h-y));
+  A = 2* (1 - dA/maxDist);
+  B = 10 * (1 - dB/maxDist);
+  C = 5* (1 - dC/maxDist);
+  D = 5 * (1 - dD/maxDist);
+  A = Math.max(0, Math.min(5, +A.toFixed(2)));
+  B = Math.max(0, Math.min(5, +B.toFixed(2)));
+  C = Math.max(0, Math.min(5, +C.toFixed(2)));
+  D = Math.max(0, Math.min(5, +D.toFixed(2)));
+  if (colorMatrix) {
+    colorMatrix.setAttribute('values', `${A} 1 0 0 0  0 ${C} 0 0 0  0 0 ${C} 0 0  ${B} 0 0 0 0`);
+  }
+}
+window.addEventListener('mousemove', updateProximityVars);
+</script>
+</body>
+</html>

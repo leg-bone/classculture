@@ -1,0 +1,198 @@
+/* Force all backgrounds to black for html, body, and video, and make all other backgrounds transparent to ensure no area is left unstyled */
+
+
+/* Stretchy menu bar at top */
+.menu-bar {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  height: 47px;
+  background: rgba(0, 0, 0, 0.3);
+  border: .1px solid #fff;
+  border-radius: 0;
+  padding: 0;
+  z-index: 100;
+  gap: 0;
+}
+
+.menu-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family:'IBM Plex Mono', monospace;
+text-decoration:none;
+  font-size: .8rem;
+  font-weight: 1;
+  border-right: .1px solid #fff;
+
+  transition: background 0.3s, letter-spacing 0.18s;
+
+}
+
+.menu-item:last-child {
+  border-right: none;
+}
+
+/* Menu item hover and active effects */
+.menu-item:hover {
+  background: rgba(255,255,255,.2);
+  letter-spacing: .1em;
+  transition: background 0.3s, letter-spacing 0.18s;
+
+}
+.menu-item:active {
+  background: rgba(255,0,0,0.25);
+}
+
+/* Mute control button styling */
+.mute-control {
+  flex: 0.25;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #fff;
+  font-size: 1.2em;
+  border: none;
+  border-left: .1px solid #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+  outline: none;
+}
+
+.mute-control:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+/* Responsive full-screen centered video background with luma-key filter */
+#myVideo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  background: transparent;
+  pointer-events: none;
+  /* Apply inline SVG filter defined in HTML to convert luminance to alpha */
+  filter: url(#lumaKey);
+  -webkit-filter: url(#lumaKey);
+  will-change: filter;
+}
+
+#bgVideo {
+  filter: brightness(0.2);
+}
+
+.content {
+  position: fixed;
+  bottom: 0;
+  background: transparent;
+  color: #000000;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Text style categories */
+.body-text {
+  font-family: 'IBM Plex Mono', monospace;
+  color: #fff;
+  font-weight: 300;
+  font-size: 1em;
+}
+.title-text {
+  font-family: 'IBM Plex Mono', monospace;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.2em;
+}
+.super-text {
+  font-family: 'IBM Plex Mono', monospace;
+  color: #fff;
+  font-weight: 1000;
+  font-size: 2em;
+
+}
+
+.content-container {
+  position: relative;
+  justify-self: center;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  width: calc(100% - 10vw);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding-left: 20px;
+  padding-right:20px;
+  padding-bottom: 20px;
+  z-index: 50;
+  overflow: visible;
+  max-height: none;
+    font-family: 'IBM Plex Mono', monospace;
+  color: #fff;
+  font-weight: 300;
+  font-size: .8em;
+  border: .1px solid #fff;
+  
+  
+}
+.content-container a{
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 0;
+  margin-top: 0;
+  color:rgb(255, 255, 255);
+  transition: letter-spacing 0.18s;
+  text-decoration:none;
+}
+.content-container a:hover{
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 200;
+  margin-top: 0;
+  color:rgb(255, 255, 255);
+  font-weight: 800;
+  transition: letter-spacing 0.18s;
+  text-decoration:dashed underline;
+
+}
+.content-container a1{
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 200;
+  margin-top: 0;
+  color:rgb(255, 255, 255);
+  font-weight: 800;
+  transition: letter-spacing 0.18s;
+  text-decoration:none;
+pointer-events: none;
+}
+
+
+.bumper {
+position: relative;
+  display: block;
+  min-height: 5vh;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  width: calc(100% - 10vw);
+  padding: 20px 0;
+  z-index: -1;
+    background: transparent;
+}
+
+.buffer-c {
+  /* occupy full viewport height as a spacer */
+  position: relative;
+  display: block;
+  min-height: 100vh;
+  margin-left: 5vw;
+    background: transparent;
+  margin-right: 5vw;
+  width: calc(100% - 10vw);
+  padding: 20px 0;
+  z-index: -1;
+}
+

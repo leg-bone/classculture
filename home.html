@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CLASSCULTURE</title>
+   <link rel="icon" href="./img/lil.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- SVG filter for luma key: converts luminance into alpha so dark areas become transparent -->
+  <svg width="0" height="0" style="position:absolute;">
+    <defs>
+      <filter id="lumaKey" color-interpolation-filters="sRGB">
+        <!-- Keep original RGB, set alpha to luminance -->
+        <feColorMatrix id="liveColorMatrix" type="matrix" values="1 1 0 0 0  0 1 0 0 0  0 0 1 0 0  1 1 1 0 0" result="withAlpha" />
+        <!-- Map luminance to a sharper alpha (threshold-like). Adjust tableValues for thresholding. -->
+        <feComponentTransfer in="withAlpha">
+          <feFuncA type="table" tableValues="0 0 1" />
+        </feComponentTransfer>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Background video with sound, behind everything -->
+  <video autoplay loop id="bgVideo" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-999;object-fit:cover;pointer-events:none;">
+    <source src="./video/bg01.mp4" type="video/mp4">
+  </video>
+
+  <nav class="menu-bar">
+    <a href="home.html" class="menu-item">HOME</a>
+    <a href="artists.html" class="menu-item">ARTISTS</a>
+    <a href="other.html" class="menu-item">OTHER?</a>
+    <button id="mute-btn" class="mute-control" aria-label="Mute/unmute background video">🔊</button>
+  </nav>
+
+  <video autoplay loop id="myVideo">
+    <source src="./video/logo03.mp4" type="video/mp4">
+  </video>
+</div>
+
+</div>
+
+<div class="buffer-c">  
+
+</div>
+  <div class="content-container">
+      <p class="super-text">
+        [MISSION]
+      </p>
+      <p class="body-text">
+      Class Culture exists to get working class artists' work paid and seen.
+</p>
+   <p class="body-text">
+  
+
+Through grass root action, communal events, and an intimate digital presence, Class Culture connects working class and class aware artists in film, performance, and literature with paid opportunities.
+
+Class Culture’s values center around the 3 meanings of “class.”  
+
+    </p>
+          <p class="title-text">
+        Working Class:
+      </p>
+
+                <p class="body-text">
+        Working class artists face unique obstacles. Being successful in today’s media climate hinges on connections, fiscal safety, and the spare time that is not in working class experience. Common advice like “Go out and make a short film,” “Take unpaid work until it becomes paid,” or “Stick around long enough for them to not forget you,” are not viable for most artists with working class backgrounds.
+      </p>
+            <p class="title-text">
+        Learning in Class:
+      </p>
+                <p class="body-text">
+        Another obstacle working class artists face is the space to fail in private. Every artist fails, but fiscal safety allows for those failures to not be as consequential. Rich people can fail upwards while the working class’s mistakes are felt harder, so Class Culture is a place for open discussion, honesty, and failures to act as precursor to success.
+      </p>
+            <p class="title-text">
+        High Class:
+      </p>
+                <p class="body-text">
+        Class Culture produces high class films, events, live-performances, and literature. Only the strongest performances, stories, and films stick around long enough to enact change.
+      </p>
+  </div>
+  <div class="bumper">
+
+</div>
+<div class="content-container">
+ <p class = "title-text">[LINKS]</p>
+ <p></p>
+  <p></p>
+<a1>- READ: [ </a1><a href="https://www.legbone.net/">WHO'S THERE FOR YOU WHEN YOU'RE NOT LOOKING?</a><a> ]</a>
+ <p></p>
+ <a1>- WATCH: [ </a1><a href="https://www.legbone.net/">WHY DID YOU WALK THROUGH THIS DOOR IN THE FIRST PLACE?</a><a> ]</a>
+ <p></p>
+ <a1>- LISTEN: [ </a1><a href="https://www.legbone.net/">WHERE ELSE COULD YOU POSSIBLY BE?</a><a> ]</a>
+</div>
+<div class="bumper"></div>
+<div class="bumper"></div>
+
+
+  <script>
+// Mute button logic
+const bgVideo = document.getElementById('bgVideo');
+const muteBtn = document.getElementById('mute-btn');
+try { bgVideo.volume = 0.05; } catch (e) {}
+bgVideo.muted = bgVideo.muted || false;
+function updateMuteIcon() {
+  muteBtn.textContent = bgVideo.muted ? '🔇' : '🔊';
+}
+muteBtn.addEventListener('click', function() {
+  bgVideo.muted = !bgVideo.muted;
+  updateMuteIcon();
+});
+const playPromise = bgVideo.play();
+if (playPromise !== undefined) {
+  playPromise.catch(function() {
+    bgVideo.muted = true;
+    updateMuteIcon();
+  });
+}
+updateMuteIcon();
+
+// Live proximity variables for corners and dynamic SVG filter update
+let A = 0, B = 0, C = 0, D = 0;
+const colorMatrix = document.getElementById('liveColorMatrix');
+function updateProximityVars(e) {
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  const x = e.clientX;
+  const y = e.clientY;
+  const maxDist = Math.sqrt(w*w + h*h);
+  const dA = Math.sqrt(x*x + y*y);
+  const dB = Math.sqrt((w-x)*(w-x) + y*y);
+  const dC = Math.sqrt(x*x + (h-y)*(h-y));
+  const dD = Math.sqrt((w-x)*(w-x) + (h-y)*(h-y));
+  A = 2* (1 - dA/maxDist);
+  B = 10 * (1 - dB/maxDist);
+  C = 5* (1 - dC/maxDist);
+  D = 5 * (1 - dD/maxDist);
+  A = Math.max(0, Math.min(5, +A.toFixed(2)));
+  B = Math.max(0, Math.min(5, +B.toFixed(2)));
+  C = Math.max(0, Math.min(5, +C.toFixed(2)));
+  D = Math.max(0, Math.min(5, +D.toFixed(2)));
+  if (colorMatrix) {
+    colorMatrix.setAttribute('values', `${A} 1 0 0 0  0 ${C} 0 0 0  0 0 ${C} 0 0  ${B} 0 0 0 0`);
+  }
+}
+window.addEventListener('mousemove', updateProximityVars);
+</script>
+</body>
+</html>
