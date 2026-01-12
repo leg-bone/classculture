@@ -12,8 +12,9 @@
   background: rgba(0, 0, 0, 0.3);
   border: .1px solid #fff;
   border-radius: 0;
+    border-image: url('./headshots/moss.jpg') 300 stretch;
   padding: 0;
-  z-index: 100;
+  z-index: 0;
   gap: 0;
 }
 
@@ -22,30 +23,58 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  background-image: url('./headshots/moss.jpg');
+  
+  background-size: 10px 10px;
+  background-repeat: repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
   font-family:'IBM Plex Mono', monospace;
 text-decoration:none;
+text-wrap: nowrap;
   font-size: .8rem;
   font-weight: 1;
   border-right: .1px solid #fff;
+    border-image: url('./headshots/moss.jpg') 300 stretch;
+  animation: breathe 350s ease-in-out infinite;
 
   transition: background 0.3s, letter-spacing 0.18s;
 
 }
+@keyframes breathe {
+  0% { background-position: 0 0; }
+  50% { background-position: 100px 100px; }
+  100% { background-position: 0 0; }
+}
 
 .menu-item:last-child {
   border-right: none;
+    border-image: url('./headshots/moss.jpg') 300 stretch;
+      animation: breathe 350s ease-in-out infinite;
 }
 
 /* Menu item hover and active effects */
 .menu-item:hover {
-  background: rgba(255,255,255,.2);
+  background-image: url('./headshots/moss.jpg');
+  animation: breathe 350s ease-in-out infinite;
+  background-size: 10px 10px;
+  background-repeat: repeat;
+    background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
   letter-spacing: .1em;
   transition: background 0.3s, letter-spacing 0.18s;
 
 }
 .menu-item:active {
-  background: rgba(255,0,0,0.25);
+  background-image: url('./headshots/moss.jpg');
+  
+  background-size: 10px 10px;
+  background-repeat: repeat;
+    background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 /* Mute control button styling */
@@ -59,6 +88,7 @@ text-decoration:none;
   font-size: 1.2em;
   border: none;
   border-left: .1px solid #fff;
+    border-image: url('./headshots/moss.jpg') 300 stretch;
   cursor: pointer;
   transition: background 0.2s;
   outline: none;
@@ -79,7 +109,7 @@ text-decoration:none;
   object-fit: cover;
   background: transparent;
   pointer-events: none;
-  /* Apply inline SVG filter defined in HTML to convert luminance to alpha */
+  opacity: 0.7;  -webkit-mask: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);  /* Apply inline SVG filter defined in HTML to convert luminance to alpha */
   filter: url(#lumaKey);
   -webkit-filter: url(#lumaKey);
   will-change: filter;
@@ -105,42 +135,192 @@ text-decoration:none;
   font-weight: 300;
   font-size: 1em;
 }
-.title-text {
+.titleA-text {
   font-family: 'IBM Plex Mono', monospace;
   color: #fff;
   font-weight: 700;
   font-size: 1.2em;
+  text-align: right;
+ 
 }
+.title-text {
+  font-family: 'IBM Plex Mono', monospace;
+   background-image: url('./headshots/moss.jpg');
+  background-size: 10px 10px;
+  background-repeat: repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: breathe 350s ease-in-out infinite;
+  font-weight: 700;
+  font-size: 1.2em;
+  
+}
+.titleB-text {
+  font-family: 'IBM Plex Mono', monospace;
+   background-image: url('./headshots/moss.jpg');
+  background-size: 10px 10px;
+  background-repeat: repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: breathe 350s ease-in-out infinite;
+  font-weight: 700;
+  font-size: 1.3em;
+  text-align: right;
+  
+}
+.superA-text {
+  
+  font-family: 'IBM Plex Mono', monospace;
+
+  color: white;
+  animation: breathe 350s ease-in-out infinite;
+  font-weight: 1000;
+  font-size: 2em;
+  display: block;
+margin-top:20px;
+text-align:center
+
+
+}
+.superA-text a {
+  
+  font-family: 'IBM Plex Mono', monospace;
+color: white;
+
+  font-weight: 1000;
+  font-size: 1em;
+display:inline-flex;
+margin-top:100px;
+text-align: right;
+
+}
+
+.superA-text:hover {
+  
+
+
+
+
+ background-image: url('./headshots/moss.jpg');
+ 
+  background-size: 10px 10px;
+  background-repeat: repeat;
+    background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+
+  transition: background 0.3s, letter-spacing 0.18s;
+
+}
+
 .super-text {
+  font-family: 'IBM Plex Mono', monospace;
+  background-image: url('./headshots/moss.jpg');
+   animation: breathe 350s ease-in-out infinite;
+  background-size: 10px 10px;
+  background-repeat: repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  
+  font-weight: 1000;
+  font-size: 2em;
+  display: inline;
+margin-top:100px;
+
+}
+.super-text-small {
   font-family: 'IBM Plex Mono', monospace;
   color: #fff;
   font-weight: 1000;
-  font-size: 2em;
-
+  font-size: 1.2em;
+  display: inline;
 }
-
-.content-container {
+.content-containerA {
+  z-index: 5990;
   position: relative;
   justify-self: center;
+  align-items: center;
   margin-left: 5vw;
   margin-right: 5vw;
   width: calc(100% - 10vw);
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.8);
   color: #fff;
   padding-left: 20px;
   padding-right:20px;
   padding-bottom: 20px;
+  padding-top:20px;
   z-index: 50;
   overflow: visible;
   max-height: none;
     font-family: 'IBM Plex Mono', monospace;
   color: #fff;
+
   font-weight: 300;
   font-size: .8em;
   border: .1px solid #fff;
+    border-image: url('./headshots/moss.jpg') 300 stretch;
+    
+
   
   
 }
+.content-container {
+  z-index: 5990;
+  position: relative;
+  justify-self: center;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  width: calc(100% - 10vw);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding-left: 20px;
+  padding-right:20px;
+  padding-bottom: 20px;
+  padding-top:20px;
+  z-index: 50;
+  overflow: visible;
+  max-height: none;
+    font-family: 'IBM Plex Mono', monospace;
+  color: #fff;
+
+  font-weight: 300;
+  font-size: .8em;
+  border: .1px solid #fff;
+    border-image: url('./headshots/moss.jpg') 300 stretch;
+  
+  
+}
+.content-container::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.content-container img{
+  float: left;
+width: 15%;
+  height: auto;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  border: 2px solid;
+  border-image: url('./headshots/moss.jpg') 300 stretch;
+  position: relative;
+}
+.content-container img::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: url('./headshots/moss.jpg') repeat;
+  background-size: 20px 20px;
+  animation: breathe 4s ease-in-out infinite;
+  z-index: -1;
+}
+
 .content-container a{
   font-family: 'IBM Plex Mono', monospace;
   font-weight: 0;
