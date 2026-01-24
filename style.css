@@ -178,7 +178,8 @@ text-wrap: wrap;
 }
 
 #bgVideo {
-  filter: brightness(0.2);
+  filter: brightness(.25);
+ 
 }
 
 .content {
