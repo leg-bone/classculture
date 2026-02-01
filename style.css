@@ -20,12 +20,13 @@
 }
 
 .menu-item {
+  
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   background-image: url('./headshots/moss.jpg');
-  
+
   background-size: 10px 10px;
   background-repeat: repeat;
   background-clip: text;
@@ -45,6 +46,7 @@ text-wrap: wrap;
 
 }
 .menu-itemB {
+  
   flex: 1;
   display: flex;
   align-items: center;
@@ -83,6 +85,7 @@ text-wrap: wrap;
 }
 
 .menu-item:last-child {
+  
   border-right: none;
     border-image: url('./headshots/moss.jpg') 300 stretch;
     
@@ -165,21 +168,39 @@ text-wrap: wrap;
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 100vw;
+  width: 100%;
   z-index: 1;
   transform: translate(-50%, -50%);
   object-fit: cover;
   background: transparent;
   pointer-events: none;
-  opacity: 0.7;  mask: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);  -webkit-mask: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);  /* Apply inline SVG filter defined in HTML to convert luminance to alpha */
+  opacity: 0.7;  mask: linear-gradient(to bottom, transparent 0%, transparent 2%, transparent 20%, transparent 40%);  -webkit-mask: linear-gradient(to bottom, transparent 0%, white 20%, white 80%, transparent 100%);  /* Apply inline SVG filter defined in HTML to convert luminance to alpha */
   filter: url(#lumaKey);
   -webkit-filter: url(#lumaKey);
   will-change: filter;
+  
 }
 
 #bgVideo {
-  filter: brightness(.25);
+  filter: contrast(.4) brightness(.4) opacity(.9) blur(2px);
+
  
+}
+
+#bgImg {
+  z-index:-1000;
+   background-image: url('./headshots/moss.jpg');
+ 
+   position: fixed;
+   translate: -2% -2%;
+padding: 0px;
+margin: 0px;
+width: 110vw;
+height: 120vh;
+  pointer-events: none;
+  background-repeat: repeat;
+  filter: contrast(.4) brightness(.6) opacity(1) blur(1px);
+
 }
 
 .content {
@@ -308,7 +329,7 @@ text-align: right;
   font-weight: 1000;
   font-size: 2em;
   display: inline;
-pointer-events: none;
+
 
 }
 
@@ -328,6 +349,7 @@ pointer-events: none;
   margin-right: 5vw;
   width: calc(100vw - 10vw);
   background: rgba(0, 0, 0, 0.8);
+  filter: blur(10px);
   color: #fff;
   padding-left: 20px;
   padding-right:20px;
@@ -407,13 +429,15 @@ position:absolute;
     height: auto;
 }
 .content-container {
+backdrop-filter: blur(111px);
+
   z-index: 5990;
   position: relative;
   justify-self: center;
   margin-left: 5vw;
   margin-right: 5vw;
   width: calc(100% - 10vw);
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.5);
   color: #fff;
   padding-left: 20px;
   padding-right:20px;
@@ -428,20 +452,22 @@ position:absolute;
   font-weight: 300;
   font-size: .8em;
   border: .1px solid #fff;
+   text-shadow:.1px .1px .1px #ffffff34, .1px .1px .1px #ffffff00;
     border-image: url('./headshots/moss.jpg') 300 stretch;
     
   
   
 }
 .content-containerZ {
-
+  filter: url(#dilate);
+  backdrop-filter:blur(77px);
   position: relative;
   justify-self: center;
   margin-left: 5vw;
   margin-right: 5vw;
 
  
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(10, 10, 10, 0.5);
   color: #fff;
   padding-left: 20px;
   padding-right:20px;
@@ -611,6 +637,7 @@ width:auto;
   display: flex;
   height: 47px;
   background: rgba(0, 0, 0, 0.3);
+  
   border: 1px solid #fff;
 
     border-image: url('./headshots/moss.jpg') 300 stretch;
